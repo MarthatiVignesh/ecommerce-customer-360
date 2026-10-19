@@ -1,0 +1,46 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Spark streaming state and checkpoints
+checkpoints/
+checkpoint/
+**/checkpoints/
+**/checkpoint/
+
+# Generated Spark outputs
+output/
+spark-warehouse/
+
+# Java build artifacts
+target/
+*.class
+
+# Local credentials and environment settings
+.env
+.env.*
+!.env.example
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Kafka runtime data and local backups
+kafka/backup/kafka-runtime-storage/
+kafka/backup/cart_events_backup.json
+
+# HBase recovery and repair artifacts
+hbase/config-backups/
+hbase/recovery-conf/
+hbase/repair-backup-*/
+hbck2-source/
+
+# Temporary local files
+/5}
