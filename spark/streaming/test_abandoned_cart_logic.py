@@ -44,6 +44,23 @@ def test_remove_deactivates_cart():
     ])
     assert active is False
 
+def test_cart_stays_active_after_another_add():
+    active, latest = process_cart_events([
+        {"event_type": "add_to_cart", "timestamp": "2026-10-19T10:00:00"},
+        {"event_type": "add_to_cart", "timestamp": "2026-10-19T10:05:00"},
+    ])
+    assert active is True
+    assert latest == "2026-10-19T10:05:00"
+
+
+def test_checkout_remains_inactive_after_later_time():
+    active, latest = process_cart_events([
+        {"event_type": "add_to_cart", "timestamp": "2026-10-19T10:00:00"},
+        {"event_type": "checkout", "timestamp": "2026-10-19T10:02:00"},
+    ])
+    assert active is False
+    assert latest == "2026-10-19T10:02:00"
+
 
 if __name__ == "__main__":
     tests = [
@@ -51,6 +68,8 @@ if __name__ == "__main__":
         test_checkout_deactivates_cart,
         test_purchase_deactivates_cart,
         test_remove_deactivates_cart,
+        test_cart_stays_active_after_another_add,
+        test_checkout_remains_inactive_after_later_time,
     ]
 
     for test in tests:
